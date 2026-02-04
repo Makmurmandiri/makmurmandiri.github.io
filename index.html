@@ -2,433 +2,347 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSP Makmur Mandiri | Koperasi Simpan Pinjam</title>
-    <meta name="description" content="Koperasi Simpan Pinjam Makmur Mandiri - Solusi pinjaman terpercaya. Proses cepat, mudah, dan aman.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="KSP Makmur Mandiri - Koperasi Simpan Pinjam Terpercaya">
+    <title>KSP Makmur Mandiri | Pinjaman Mudah & Cepat</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="bg-gradient"></div>
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-        </div>
+    <!-- Header Mobile -->
+    <header class="header-mobile">
+  <div class="header-container">
+
+    <div class="logo">
+      <img src="kokok/ksp.ico" alt="Logo KSP Makmur Mandiri" class="logo-img">
+      <span class="logo-text">KSP Makmur Mandiri</span>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <span class="logo-icon">💰</span>
-                    <span class="logo-text">KSP Makmur Mandiri</span>
-                </div>
-                <nav class="nav">
-                    <a href="#hero" class="nav-link">Beranda</a>
-                    <a href="#tentang" class="nav-link">Tentang</a>
-                    <a href="#kalkulator" class="nav-link">Kalkulator</a>
-                    <a href="#tabel-pinjaman" class="nav-link">Tabel Pinjaman</a>
-                    <a href="#syarat" class="nav-link">Persyaratan</a>
-                    <a href="#kontak" class="nav-link">Kontak</a>
-                </nav>
-                <button class="btn-ajukan-mobile-fixed" id="btnAjukanHeader">
-                    Ajukan Sekarang
-                </button>
+    <button class="btn-ajukan" id="btnAjukanHeader">
+      Ajukan Sekarang
+    </button>
 
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </header>
+  </div>
+</header>
 
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav" id="mobileNav">
-  <a href="#hero" class="mobile-nav-link">Beranda</a>
-  <a href="#tentang" class="mobile-nav-link">Tentang</a>
-  <a href="#kalkulator" class="mobile-nav-link">Kalkulator</a>
-  <a href="#tabel-pinjaman" class="mobile-nav-link">Tabel Pinjaman</a>
-  <a href="#syarat" class="mobile-nav-link">Persyaratan</a>
-  <a href="#kontak" class="mobile-nav-link">Kontak</a>
-
-  <!-- TOMBOL MOBILE DI SINI -->
-  <button class="btn-ajukan-mobile" id="btnAjukanMobile">
-    Ajukan Sekarang
-  </button>
-</div>
-
-
-    <main>
+    <!-- Main Content -->
+    <main class="main-content">
         <!-- Hero Section -->
-        <section class="hero" id="hero">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge-icon">✓</span>
-                    <span>Koperasi Resmi & Terpercaya</span>
+        <section class="hero-section">
+            <div class="badge">
+                <span class="badge-icon">✓</span>
+                <span class="badge-text">Koperasi Resmi & Terpercaya</span>
+            </div>
+            
+            <h1 class="hero-title">
+                Solusi Pinjaman<br>
+                <span class="highlight">Mudah & Cepat</span><br>
+                untuk Masa Depan Anda
+            </h1>
+            
+            <p class="hero-description">
+                KSP Makmur Mandiri hadir untuk membantu kebutuhan finansial Anda dengan proses yang transparan, aman, dan terpercaya.
+            </p>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💵</div>
+                    <div class="stat-value">Rp 20 Juta</div>
+                    <div class="stat-label">Pinjaman Maksimal</div>
                 </div>
-                <h1 class="hero-title">
-                    Solusi Pinjaman <span class="highlight">Mudah & Cepat</span> untuk Masa Depan Anda
-                </h1>
-                <p class="hero-description">
-                    KSP Makmur Mandiri hadir untuk membantu kebutuhan finansial Anda dengan proses yang transparan, aman, dan terpercaya.
-                </p>
-                <div class="hero-cta-group">
-                    <a href="#kalkulator" class="btn-primary btn-large">
-                        <span>Hitung Pinjaman</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
-                    <a href="#tabel-pinjaman" class="btn-secondary btn-large">
-                        <span>Lihat Tabel Pinjaman</span>
-                    </a>
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-value">24 Bulan</div>
+                    <div class="stat-label">Tenor Maksimal</div>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="hero-card">
-                    <div class="card-header">
-                        <span class="card-icon">💰</span>
-                        <span class="card-label">Pinjaman Maksimal</span>
-                    </div>
-                    <div class="card-value">Rp 20.000.000</div>
-                    <div class="card-footer">Tenor hingga 24 bulan</div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value">2%</div>
+                    <div class="stat-label">Jasa Per Bulan</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value">16 Tahun</div>
+                    <div class="stat-label">Pengalaman</div>
                 </div>
             </div>
         </section>
 
-        <!-- Trust Points Section -->
-        <section class="trust-section" id="tentang">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge">Kenapa Memilih Kami?</span>
-                    <h2 class="section-title">Keunggulan KSP Makmur Mandiri</h2>
-                    <p class="section-description">Kami berkomitmen memberikan layanan terbaik untuk semua anggota</p>
+        <!-- Keunggulan Section -->
+        <section class="section">
+            <h2 class="section-title">Kenapa Memilih Kami?</h2>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📜</div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Legalitas Resmi</h3>
+                    <p class="feature-desc">Terdaftar resmi dengan Badan Hukum No. 18/SKT/KOPERASI & UMKM/518/VI/2009</p>
                 </div>
-                <div class="trust-grid">
-                    <div class="trust-card">
-                        <div class="trust-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                <path d="M9 12l2 2 4-4"></path>
-                            </svg>
-                        </div>
-                        <h3 class="trust-title">Legalitas Resmi</h3>
-                        <p class="trust-desc">Terdaftar resmi dengan proses yang transparan dan terpercaya</p>
-                    </div>
-                    <div class="trust-card">
-                        <div class="trust-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                        </div>
-                        <h3 class="trust-title">Proses Cepat</h3>
-                        <p class="trust-desc">Pengajuan mudah dengan proses verifikasi yang cepat dan transparan</p>
-                    </div>
-                    <div class="trust-card">
-                        <div class="trust-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                            </svg>
-                        </div>
-                        <h3 class="trust-title">Bunga Ringan</h3>
-                        <p class="trust-desc">Jasa hanya 2% per bulan dengan cicilan tetap yang mudah direncanakan</p>
-                    </div>
-                    <div class="trust-card">
-                        <div class="trust-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                        </div>
-                        <h3 class="trust-title">Pelayanan Ramah</h3>
-                        <p class="trust-desc">Tim kami siap membantu dengan pelayanan yang ramah dan profesional</p>
-                    </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Proses Cepat</h3>
+                    <p class="feature-desc">Pengajuan mudah dengan proses verifikasi yang cepat dan transparan</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Bunga Ringan</h3>
+                    <p class="feature-desc">Jasa hanya 2% per bulan dengan cicilan tetap yang mudah direncanakan</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Pelayanan Ramah</h3>
+                    <p class="feature-desc">Tim kami siap membantu dengan pelayanan yang ramah dan profesional</p>
                 </div>
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">💵</div>
-                        <div class="stat-value">Rp 20.000.000</div>
-                        <div class="stat-label">Pinjaman Maksimal</div>
+        <!-- Kalkulator Section -->
+        <section class="section calculator-section">
+            <h2 class="section-title">Kalkulator Pinjaman</h2>
+            <p class="section-subtitle">Hitung angsuran pinjaman Anda</p>
+
+            <div class="calculator-container">
+                <div class="input-group">
+                    <label class="input-label">Jumlah Pinjaman</label>
+                    <select id="loanAmount" class="input-select">
+                        <option value="3000000">Rp 3.000.000</option>
+                        <option value="4000000">Rp 4.000.000</option>
+                        <option value="5000000">Rp 5.000.000</option>
+                        <option value="6000000">Rp 6.000.000</option>
+                        <option value="7000000">Rp 7.000.000</option>
+                        <option value="8000000">Rp 8.000.000</option>
+                        <option value="9000000">Rp 9.000.000</option>
+                        <option value="10000000" selected>Rp 10.000.000</option>
+                        <option value="11000000">Rp 11.000.000</option>
+                        <option value="12000000">Rp 12.000.000</option>
+                        <option value="13000000">Rp 13.000.000</option>
+                        <option value="14000000">Rp 14.000.000</option>
+                        <option value="15000000">Rp 15.000.000</option>
+                        <option value="16000000">Rp 16.000.000</option>
+                        <option value="17000000">Rp 17.000.000</option>
+                        <option value="18000000">Rp 18.000.000</option>
+                        <option value="19000000">Rp 19.000.000</option>
+                        <option value="20000000">Rp 20.000.000</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Tenor (Bulan)</label>
+                    <select id="loanTenor" class="input-select">
+                        <option value="3">3 Bulan</option>
+                        <option value="4">4 Bulan</option>
+                        <option value="5">5 Bulan</option>
+                        <option value="6">6 Bulan</option>
+                        <option value="7">7 Bulan</option>
+                        <option value="8">8 Bulan</option>
+                        <option value="9">9 Bulan</option>
+                        <option value="10">10 Bulan</option>
+                        <option value="11">11 Bulan</option>
+                        <option value="12" selected>12 Bulan</option>
+                        <option value="13">13 Bulan</option>
+                        <option value="14">14 Bulan</option>
+                        <option value="15">15 Bulan</option>
+                        <option value="16">16 Bulan</option>
+                        <option value="17">17 Bulan</option>
+                        <option value="18">18 Bulan</option>
+                        <option value="19">19 Bulan</option>
+                        <option value="20">20 Bulan</option>
+                        <option value="21">21 Bulan</option>
+                        <option value="22">22 Bulan</option>
+                        <option value="23">23 Bulan</option>
+                        <option value="24">24 Bulan</option>
+                    </select>
+                </div>
+
+                <button class="btn-calculate" id="btnCalculate">Hitung Angsuran</button>
+
+                <div class="result-container" id="resultContainer" style="display: none;">
+                    <div class="result-section">
+                        <h3 class="result-section-title">Dana yang Diterima</h3>
+                        <div class="result-item">
+                            <span class="result-label">Jumlah Pinjaman</span>
+                            <span class="result-value" id="resultLoanAmount">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Biaya Admin (8.5%)</span>
+                            <span class="result-value" id="resultAdminFee">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Simpanan Wajib Awal</span>
+                            <span class="result-value" id="resultInitialSavings">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Biaya Materai</span>
+                            <span class="result-value" id="resultStampDuty">-</span>
+                        </div>
+                        <div class="result-item highlight">
+                            <span class="result-label">Dana Diterima</span>
+                            <span class="result-value" id="resultReceivedAmount">-</span>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📅</div>
-                        <div class="stat-value">24 Bulan</div>
-                        <div class="stat-label">Tenor Maksimal</div>
+
+                    <div class="result-divider"></div>
+
+                    <div class="result-section">
+                        <h3 class="result-section-title">Angsuran Per Bulan</h3>
+                        <div class="result-item">
+                            <span class="result-label">Angsuran Pokok</span>
+                            <span class="result-value" id="resultPrincipal">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Jasa (2%)</span>
+                            <span class="result-value" id="resultInterest">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Simpanan Wajib</span>
+                            <span class="result-value" id="resultMonthlySavings">-</span>
+                        </div>
+                        <div class="result-item highlight">
+                            <span class="result-label">Total Per Bulan</span>
+                            <span class="result-value" id="resultTotalMonthly">-</span>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📊</div>
-                        <div class="stat-value">2%</div>
-                        <div class="stat-label">Jasa Per Bulan</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⭐</div>
-                        <div class="stat-value">16 Tahun</div>
-                        <div class="stat-label">Pengalaman Melayani</div>
-                    </div>
+
+                    <button class="btn-ajukan-full" id="btnAjukanCalc">
+                        Ajukan Pinjaman Ini
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- Calculator Section -->
-        <section class="calculator-section" id="kalkulator">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge">Kalkulator Pinjaman</span>
-                    <h2 class="section-title">Hitung Angsuran Otomatis</h2>
-                    <p class="section-description">Masukkan jumlah pinjaman dan tenor untuk menghitung detail angsuran</p>
-                </div>
-                <div class="calculator-container">
-                    <div class="calculator-input-group">
-                        <div class="input-wrapper">
-                            <label for="loanAmount" class="input-label">Jumlah Pinjaman</label>
-                            <select id="loanAmount" class="calculator-select">
-                                <option value="3000000">Rp 3.000.000</option>
-                                <option value="4000000">Rp 4.000.000</option>
-                                <option value="5000000">Rp 5.000.000</option>
-                                <option value="6000000">Rp 6.000.000</option>
-                                <option value="7000000">Rp 7.000.000</option>
-                                <option value="8000000">Rp 8.000.000</option>
-                                <option value="9000000">Rp 9.000.000</option>
-                                <option value="10000000" selected>Rp 10.000.000</option>
-                                <option value="11000000">Rp 11.000.000</option>
-                                <option value="12000000">Rp 12.000.000</option>
-                                <option value="13000000">Rp 13.000.000</option>
-                                <option value="14000000">Rp 14.000.000</option>
-                                <option value="15000000">Rp 15.000.000</option>
-                                <option value="16000000">Rp 16.000.000</option>
-                                <option value="17000000">Rp 17.000.000</option>
-                                <option value="18000000">Rp 18.000.000</option>
-                                <option value="19000000">Rp 19.000.000</option>
-                                <option value="20000000">Rp 20.000.000</option>
-                            </select>
-                        </div>
-                        <div class="input-wrapper">
-                            <label for="loanTenor" class="input-label">Tenor (Bulan)</label>
-                            <select id="loanTenor" class="calculator-select">
-                                <option value="3">3 Bulan</option>
-                                <option value="4">4 Bulan</option>
-                                <option value="5">5 Bulan</option>
-                                <option value="6">6 Bulan</option>
-                                <option value="7">7 Bulan</option>
-                                <option value="8">8 Bulan</option>
-                                <option value="9">9 Bulan</option>
-                                <option value="10">10 Bulan</option>
-                                <option value="11">11 Bulan</option>
-                                <option value="12">12 Bulan</option>
-                                <option value="13">13 Bulan</option>
-                                <option value="14">14 Bulan</option>
-                                <option value="15">15 Bulan</option>
-                                <option value="16">16 Bulan</option>
-                                <option value="17">17 Bulan</option>
-                                <option value="18">18 Bulan</option>
-                                <option value="19">19 Bulan</option>
-                                <option value="20">20 Bulan</option>
-                                <option value="21">21 Bulan</option>
-                                <option value="22">22 Bulan</option>
-                                <option value="23">23 Bulan</option>
-                                <option value="24" selected>24 Bulan</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button id="calculateBtn" class="btn-calculate">Hitung Angsuran</button>
-                    
-                    <div id="calculatorResult" class="calculator-result" style="display: none;">
-                        <div class="result-grid">
-                            <div class="result-card">
-                                <div class="result-label">Jumlah Pinjaman</div>
-                                <div class="result-value" id="resultLoanAmount">-</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label">Biaya Administrasi (8.5%)</div>
-                                <div class="result-value" id="resultAdminFee">-</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label">Simpanan Wajib Awal</div>
-                                <div class="result-value" id="resultInitialSavings">-</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label">Biaya Materai</div>
-                                <div class="result-value" id="resultStampDuty">-</div>
-                            </div>
-                            <div class="result-card highlight">
-                                <div class="result-label">Dana Diterima</div>
-                                <div class="result-value" id="resultReceivedAmount">-</div>
-                            </div>
-                        </div>
-                        <div class="result-divider"></div>
-                        <div class="result-grid">
-                            <div class="result-card">
-                                <div class="result-label">Angsuran Pokok per Bulan</div>
-                                <div class="result-value" id="resultPrincipalPayment">-</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label">Jasa per Bulan (2%)</div>
-                                <div class="result-value" id="resultInterestPayment">-</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label">Simpanan Wajib per Bulan</div>
-                                <div class="result-value" id="resultMonthlySavings">-</div>
-                            </div>
-                            <div class="result-card highlight">
-                                <div class="result-label">Total Angsuran per Bulan</div>
-                                <div class="result-value" id="resultTotalMonthly">-</div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Persyaratan Section -->
+        <section class="section">
+            <h2 class="section-title">Persyaratan Dokumen</h2>
+            <p class="section-subtitle">Siapkan dokumen berikut untuk pengajuan pinjaman</p>
+
+            <div class="requirement-card">
+                <div class="requirement-number">1</div>
+                <div class="requirement-content">
+                    <h3 class="requirement-title">KTP + Kartu Keluarga</h3>
+                    <p class="requirement-desc">Fotokopi KTP dan KK yang masih berlaku</p>
                 </div>
             </div>
-        </section>
 
-        <!-- Loan Table Section -->
-        <section class="table-section" id="tabel-pinjaman">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge">Tabel Pinjaman</span>
-                    <h2 class="section-title">Simulasi Angsuran Pinjaman</h2>
-                    <p class="section-description">Angsuran per bulan = Pokok + Jasa 2% + Simpanan Wajib</p>
-                </div>
-                <div class="table-wrapper">
-                    <div class="table-scroll-hint">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                        <span>Geser untuk melihat lebih</span>
-                    </div>
-                    <div class="table-container">
-                        <table class="loan-table" id="loanTable">
-                            <!-- Table will be generated by JavaScript -->
-                        </table>
-                    </div>
-                </div>
-                <div class="table-note">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                    <span>Semua nilai dalam Rupiah (Rp). Angsuran sudah termasuk pokok + jasa 2% per bulan + simpanan wajib.</span>
+            <div class="requirement-card">
+                <div class="requirement-number">2</div>
+                <div class="requirement-content">
+                    <h3 class="requirement-title">Ijazah Terakhir</h3>
+                    <p class="requirement-desc">Fotokopi ijazah pendidikan terakhir</p>
                 </div>
             </div>
-        </section>
 
-        <!-- Requirements Section -->
-        <section class="requirements-section" id="syarat">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge">Persyaratan</span>
-                    <h2 class="section-title">Dokumen yang Diperlukan</h2>
-                    <p class="section-description">Siapkan dokumen berikut untuk pengajuan pinjaman</p>
+            <div class="requirement-card">
+                <div class="requirement-number">3</div>
+                <div class="requirement-content">
+                    <h3 class="requirement-title">Surat Pengangkatan/Kontrak Kerja</h3>
+                    <p class="requirement-desc">Bukti status kepegawaian dari perusahaan</p>
                 </div>
-                <div class="requirements-grid">
-                    <div class="requirement-card">
-                        <div class="requirement-number">1</div>
-                        <div class="requirement-content">
-                            <h3>KTP + Kartu Keluarga</h3>
-                            <p>Fotokopi KTP dan KK yang masih berlaku</p>
-                        </div>
-                    </div>
-                    <div class="requirement-card">
-                        <div class="requirement-number">2</div>
-                        <div class="requirement-content">
-                            <h3>Ijazah Terakhir</h3>
-                            <p>Fotokopi ijazah pendidikan terakhir</p>
-                        </div>
-                    </div>
-                    <div class="requirement-card">
-                        <div class="requirement-number">3</div>
-                        <div class="requirement-content">
-                            <h3>Surat Pengangkatan/Kontrak Kerja</h3>
-                            <p>Bukti status kepegawaian dari perusahaan</p>
-                        </div>
-                    </div>
-                    <div class="requirement-card">
-                        <div class="requirement-number">4</div>
-                        <div class="requirement-content">
-                            <h3>Kartu BPJS Ketenagakerjaan</h3>
-                            <p>Kartu Jamsostek/BPJS asli yang masih aktif</p>
-                        </div>
-                    </div>
-                    <div class="requirement-card">
-                        <div class="requirement-number">5</div>
-                        <div class="requirement-content">
-                            <h3>Buku Tabungan + ATM</h3>
-                            <p>Buku tabungan gaji dan rekening koran 3 bulan terakhir</p>
-                        </div>
-                    </div>
-                    <div class="requirement-card">
-                        <div class="requirement-number">6</div>
-                        <div class="requirement-content">
-                            <h3>Slip Gaji Terakhir</h3>
-                            <p>Slip gaji bulan terakhir dari perusahaan</p>
-                        </div>
-                    </div>
+            </div>
+
+            <div class="requirement-card">
+                <div class="requirement-number">4</div>
+                <div class="requirement-content">
+                    <h3 class="requirement-title">Kartu BPJS Ketenagakerjaan</h3>
+                    <p class="requirement-desc">Kartu Jamsostek/BPJS asli yang masih aktif</p>
+                </div>
+            </div>
+
+            <div class="requirement-card">
+                <div class="requirement-number">5</div>
+                <div class="requirement-content">
+                    <h3 class="requirement-title">Buku Tabungan + ATM</h3>
+                    <p class="requirement-desc">Buku tabungan gaji dan rekening koran 3 bulan terakhir</p>
+                </div>
+            </div>
+
+            <div class="requirement-card">
+                <div class="requirement-number">6</div>
+                <div class="requirement-content">
+                    <h3 class="requirement-title">Slip Gaji Terakhir</h3>
+                    <p class="requirement-desc">Slip gaji bulan terakhir dari perusahaan</p>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section class="address-section" id="kontak">
-            <div class="container">
-                <div class="address-card">
-                    <div class="address-content">
-                        <div class="section-header">
-                            <span class="section-badge">Lokasi Kantor</span>
-                            <h2 class="section-title">Kunjungi Kantor Kami</h2>
-                        </div>
-                        <div class="address-details">
-                            <div class="address-item">
-                                <div class="address-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                        <circle cx="12" cy="10" r="3"></circle>
-                                    </svg>
-                                </div>
-                                <div class="address-text">
-                                    <strong>Alamat:</strong>
-                                    <p>Koperasi Simpan Pinjam Makmur Mandiri</p>
-                                </div>
-                            </div>
-                            <div class="address-item">
-                                <div class="address-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                    </svg>
-                                </div>
-                                <div class="address-text">
-                                    <strong>Telepon Kantor:</strong>
-                                    <p>(021) 1234-5678</p>
-                                </div>
-                            </div>
-                            <div class="address-item">
-                                <div class="address-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                                    </svg>
-                                </div>
-                                <div class="address-text">
-                                    <strong>Jam Operasional:</strong>
-                                    <p>Senin - Jumat: 08.00 - 16.00 WIB<br>Sabtu: 08.00 - 12.00 WIB</p>
-                                </div>
-                            </div>
-                        </div>
+        <section class="section">
+            <h2 class="section-title">Hubungi Kami</h2>
+            
+            <a href="https://wa.me/6281383960670" class="contact-card" target="_blank">
+                <div class="contact-avatar">B</div>
+                <div class="contact-info">
+                    <div class="contact-name">Bram</div>
+                    <div class="contact-phone">0813 8396 0670</div>
+                </div>
+                <span class="contact-wa-icon">🟢</span>
+            </a>
+
+            <a href="https://wa.me/6285724729600" class="contact-card" target="_blank">
+                <div class="contact-avatar">R</div>
+                <div class="contact-info">
+                    <div class="contact-name">Risky</div>
+                    <div class="contact-phone">0857 2472 9600</div>
+                </div>
+                <span class="contact-wa-icon">🟢</span>
+            </a>
+
+            <a href="https://wa.me/62881025646238" class="contact-card" target="_blank">
+                <div class="contact-avatar">J</div>
+                <div class="contact-info">
+                    <div class="contact-name">Jubri</div>
+                    <div class="contact-phone">0881 0256 46238</div>
+                </div>
+                <span class="contact-wa-icon">🟢</span>
+            </a>
+
+            <a href="https://wa.me/6285591587413" class="contact-card" target="_blank">
+                <div class="contact-avatar">R</div>
+                <div class="contact-info">
+                    <div class="contact-name">Riko</div>
+                    <div class="contact-phone">0855 9158 7413</div>
+                </div>
+                <span class="contact-wa-icon">🟢</span>
+            </a>
+        </section>
+
+        <!-- Lokasi Section -->
+        <section class="section location-section">
+            <h2 class="section-title">Lokasi Kantor</h2>
+            
+            <div class="location-card">
+                <div class="location-item">
+                    <div class="location-icon">📍</div>
+                    <div class="location-text">
+                        <strong>Alamat:</strong>
+                        <p>Jl. Proklamasi, Dsn. Babakan Tengah RT. 42 RW. 02, Desa Karyasari, Kec. Rengasdengklok, Kab. Karawang</p>
+                    </div>
+                </div>
+
+                <div class="location-item">
+                    <div class="location-icon">📞</div>
+                    <div class="location-text">
+                        <strong>Telepon Kantor:</strong>
+                        <p>(021) 1234-5678</p>
+                    </div>
+                </div>
+
+                <div class="location-item">
+                    <div class="location-icon">🕐</div>
+                    <div class="location-text">
+                        <strong>Jam Operasional:</strong>
+                        <p>Senin - Jumat: 08.00 - 16.00 WIB<br>Sabtu: 08.00 - 12.00 WIB</p>
                     </div>
                 </div>
             </div>
@@ -436,57 +350,29 @@
 
         <!-- CTA Section -->
         <section class="cta-section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2 class="cta-title">Siap Mengajukan Pinjaman?</h2>
-                    <p class="cta-description">Hubungi kami sekarang untuk konsultasi gratis. Tim kami siap membantu Anda mendapatkan pinjaman yang sesuai dengan kebutuhan.</p>
-                    <a href="#kontak" class="btn-primary btn-cta">
-                        <span>Hubungi Kami Sekarang</span>
-                    </a>
-                </div>
-            </div>
+            <h2 class="cta-title">Siap Mengajukan Pinjaman?</h2>
+            <p class="cta-description">
+                Hubungi kami sekarang untuk konsultasi gratis. Tim kami siap membantu Anda mendapatkan pinjaman yang sesuai dengan kebutuhan.
+            </p>
+            <button class="btn-cta" id="btnAjukanCTA">Hubungi Kami Sekarang</button>
         </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">
+                © 2026 KSP Makmur Mandiri<br>
+                Powered by Karawang 06
+            </p>
+        </footer>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <span class="logo-icon">💰</span>
-                        <span class="logo-text">KSP Makmur Mandiri</span>
-                    </div>
-                    <p class="footer-desc">Solusi pinjaman terpercaya untuk masa depan Anda</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Menu</h4>
-                    <a href="#hero">Beranda</a>
-                    <a href="#tentang">Tentang</a>
-                    <a href="#kalkulator">Kalkulator</a>
-                    <a href="#syarat">Persyaratan</a>
-                </div>
-                <div class="footer-contact">
-                    <h4>Kontak</h4>
-                    <p>Telepon: (021) 1234-5678</p>
-                    <p>Email: info@makmurmandiri.com</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 KSP Makmur Mandiri Karawang 06.</p>
-            </div>
-        </div>
-    </footer>
-
     <!-- Floating WhatsApp Button -->
-<div class="wa-float">
-  <button id="waAjukan" aria-label="Ajukan Pinjaman via WhatsApp">
-    <svg viewBox="0 0 32 32" width="26" height="26" fill="currentColor">
-      <path d="M19.11 17.2c-.27-.14-1.6-.8-1.85-.89-.25-.09-.43-.14-.6.14-.17.27-.69.89-.85 1.07-.16.18-.32.2-.6.07-.27-.14-1.15-.42-2.2-1.34-.82-.73-1.37-1.63-1.53-1.9-.16-.27-.02-.42.12-.55.13-.13.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.6-1.45-.82-1.98-.22-.53-.44-.46-.6-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.3s.98 2.66 1.12 2.84c.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.55.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/>
-      <path d="M16 3C9.38 3 4 8.38 4 15c0 2.65.87 5.1 2.34 7.1L4 29l7.1-2.34C13.1 27.13 15.35 28 18 28c6.62 0 12-5.38 12-12S24.62 3 18 3zm0 22c-2.32 0-4.47-.77-6.2-2.07l-.45-.33-4.2 1.38 1.38-4.1-.29-.42C7.8 18.02 7 16.04 7 14c0-5.51 4.49-10 10-10s10 4.49 10 10-4.49 11-10 11z"/>
-    </svg>
-  </button>
-</div>
+    <a href="https://wa.me/6285724729600" class="wa-float" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
     <script src="script.js"></script>
 </body>
 </html>
