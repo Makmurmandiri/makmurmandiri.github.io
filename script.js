@@ -1,27 +1,20 @@
-// Mobile Menu Toggle
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileNav = document.getElementById('mobileNav');
+// ========================================
+// GLOBAL VARIABLES
+// ========================================
+const WHATSAPP_NUMBER = '6285724729600';
+const ADMIN_FEE_RATE = 0.085; // 8.5%
+const INTEREST_RATE = 0.02; // 2% per month
+const STAMP_DUTY = 33000; // 3 materai @ 11,000 each
+const INITIAL_SAVINGS = 1025000; // Fixed initial mandatory savings
+const MONTHLY_SAVINGS = 155000; // Fixed monthly mandatory savings
 
-if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileNav.classList.toggle('active');
-    });
-}
+// ========================================
+// UTILITY FUNCTIONS
+// ========================================
 
-// Close mobile menu when clicking on links
-const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-mobileNavLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        mobileNav.classList.remove('active');
-    });
-});
-
-// Loan Calculator
-const calculateBtn = document.getElementById('calculateBtn');
-const loanAmountSelect = document.getElementById('loanAmount');
-const loanTenorSelect = document.getElementById('loanTenor');
-const calculatorResult = document.getElementById('calculatorResult');
-
+/**
+ * Format number to Indonesian currency
+ */
 function formatCurrency(amount) {
     return new Intl.NumberFormat('id-ID', {
         style: 'currency',
@@ -31,202 +24,326 @@ function formatCurrency(amount) {
     }).format(amount);
 }
 
+/**
+ * Open WhatsApp with custom message
+ */
+function openWhatsApp(message = null) {
+    const defaultMessage = 'Halo KSP Makmur Mandiri, saya ingin mengajukan pinjaman. Mohon informasinya, terima kasih.';
+    const finalMessage = message || defaultMessage;
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(finalMessage)}`;
+    window.open(url, '_blank');
+}
+
+/**
+ * Smooth scroll to element
+ */
+function smoothScrollTo(element) {
+    if (element) {
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+// ========================================
+// CALCULATOR FUNCTIONS
+// ========================================
+
+/**
+ * Calculate loan details
+ */
 function calculateLoan() {
+    const loanAmountSelect = document.getElementById('loanAmount');
+    const loanTenorSelect = document.getElementById('loanTenor');
+    const resultContainer = document.getElementById('resultContainer');
+
+    if (!loanAmountSelect || !loanTenorSelect || !resultContainer) {
+        console.error('Calculator elements not found');
+        return;
+    }
+
     const loanAmount = parseInt(loanAmountSelect.value);
     const tenor = parseInt(loanTenorSelect.value);
-    
-    // Constants
-    const ADMIN_FEE_RATE = 0.085; // 8.5%
-    const INTEREST_RATE = 0.02; // 2% per month
-    const STAMP_DUTY = 33000; // 3 materai @ 11,000 each
-    const INITIAL_SAVINGS = 1025000; // Fixed initial mandatory savings
-    const MONTHLY_SAVINGS = 155000; // Fixed monthly mandatory savings
-    
-    // Calculations
+
+    // Calculate all values
     const adminFee = loanAmount * ADMIN_FEE_RATE;
     const receivedAmount = loanAmount - adminFee - INITIAL_SAVINGS - STAMP_DUTY;
-    
     const principalPayment = loanAmount / tenor;
     const interestPayment = loanAmount * INTEREST_RATE;
     const totalMonthlyPayment = principalPayment + interestPayment + MONTHLY_SAVINGS;
-    
-    // Display results
-    document.getElementById('resultLoanAmount').textContent = formatCurrency(loanAmount);
-    document.getElementById('resultAdminFee').textContent = formatCurrency(adminFee);
-    document.getElementById('resultInitialSavings').textContent = formatCurrency(INITIAL_SAVINGS);
-    document.getElementById('resultStampDuty').textContent = formatCurrency(STAMP_DUTY);
-    document.getElementById('resultReceivedAmount').textContent = formatCurrency(receivedAmount);
-    
-    document.getElementById('resultPrincipalPayment').textContent = formatCurrency(principalPayment);
-    document.getElementById('resultInterestPayment').textContent = formatCurrency(interestPayment);
-    document.getElementById('resultMonthlySavings').textContent = formatCurrency(MONTHLY_SAVINGS);
-    document.getElementById('resultTotalMonthly').textContent = formatCurrency(totalMonthlyPayment);
-    
-    calculatorResult.style.display = 'block';
-    
+
+    // Update DOM elements
+    updateElementText('resultLoanAmount', formatCurrency(loanAmount));
+    updateElementText('resultAdminFee', formatCurrency(adminFee));
+    updateElementText('resultInitialSavings', formatCurrency(INITIAL_SAVINGS));
+    updateElementText('resultStampDuty', formatCurrency(STAMP_DUTY));
+    updateElementText('resultReceivedAmount', formatCurrency(receivedAmount));
+    updateElementText('resultPrincipal', formatCurrency(principalPayment));
+    updateElementText('resultInterest', formatCurrency(interestPayment));
+    updateElementText('resultMonthlySavings', formatCurrency(MONTHLY_SAVINGS));
+    updateElementText('resultTotalMonthly', formatCurrency(totalMonthlyPayment));
+
+    // Show result container
+    resultContainer.style.display = 'block';
+
     // Smooth scroll to result
     setTimeout(() => {
-        calculatorResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        smoothScrollTo(resultContainer);
     }, 100);
 }
 
-if (calculateBtn) {
-    calculateBtn.addEventListener('click', calculateLoan);
-    
-    // Calculate on load with default values
-    calculateLoan();
+/**
+ * Update element text safely
+ */
+function updateElementText(elementId, text) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.textContent = text;
+    }
 }
 
-// Generate Loan Table
-function generateLoanTable() {
-    const table = document.getElementById('loanTable');
-    if (!table) return;
-    
-    const loanAmounts = [3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000, 10000000, 11000000, 12000000, 13000000, 14000000, 15000000, 16000000, 17000000, 18000000, 19000000, 20000000];
-    const tenors = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-    
-    const INTEREST_RATE = 0.02; // 2% per month
-    const MONTHLY_SAVINGS = 155000; // Fixed monthly mandatory savings
-    
-    // Create table header
-    let headerHTML = '<thead><tr><th class="sticky-col">Jumlah Pinjaman</th>';
-    tenors.forEach(tenor => {
-        headerHTML += `<th>${tenor} Bulan</th>`;
-    });
-    headerHTML += '</tr></thead>';
-    
-    // Create table body
-    let bodyHTML = '<tbody>';
-    loanAmounts.forEach(loanAmount => {
-        bodyHTML += `<tr><td class="sticky-col loan-amount">${formatCurrency(loanAmount)}</td>`;
-        
-        tenors.forEach(tenor => {
-            const principalPayment = loanAmount / tenor;
-            const interestPayment = loanAmount * INTEREST_RATE;
-            const totalMonthlyPayment = principalPayment + interestPayment + MONTHLY_SAVINGS;
-            
-            bodyHTML += `<td>${formatCurrency(totalMonthlyPayment)}</td>`;
+/**
+ * Generate WhatsApp message with loan details
+ */
+function generateLoanMessage() {
+    const loanAmountSelect = document.getElementById('loanAmount');
+    const loanTenorSelect = document.getElementById('loanTenor');
+
+    if (!loanAmountSelect || !loanTenorSelect) {
+        return null;
+    }
+
+    const loanAmount = parseInt(loanAmountSelect.value);
+    const tenor = parseInt(loanTenorSelect.value);
+    const principalPayment = loanAmount / tenor;
+    const interestPayment = loanAmount * INTEREST_RATE;
+    const totalMonthlyPayment = principalPayment + interestPayment + MONTHLY_SAVINGS;
+
+    const message = `Halo KSP Makmur Mandiri,
+
+Saya ingin mengajukan pinjaman dengan detail:
+
+Jumlah Pinjaman: ${formatCurrency(loanAmount)}
+Tenor: ${tenor} bulan
+Angsuran per Bulan: ${formatCurrency(totalMonthlyPayment)}
+
+Mohon informasi lebih lanjut mengenai persyaratan dan proses pengajuannya.
+
+Terima kasih.`;
+
+    return message;
+}
+
+// ========================================
+// EVENT LISTENERS
+// ========================================
+
+/**
+ * Initialize all event listeners
+ */
+function initializeEventListeners() {
+    // Calculate button
+    const btnCalculate = document.getElementById('btnCalculate');
+    if (btnCalculate) {
+        btnCalculate.addEventListener('click', calculateLoan);
+    }
+
+    // Header Ajukan button
+    const btnAjukanHeader = document.getElementById('btnAjukanHeader');
+    if (btnAjukanHeader) {
+        btnAjukanHeader.addEventListener('click', () => {
+            openWhatsApp();
         });
-        
-        bodyHTML += '</tr>';
-    });
-    bodyHTML += '</tbody>';
+    }
+
+    // Calculator Ajukan button
+    const btnAjukanCalc = document.getElementById('btnAjukanCalc');
+    if (btnAjukanCalc) {
+        btnAjukanCalc.addEventListener('click', () => {
+            const message = generateLoanMessage();
+            openWhatsApp(message);
+        });
+    }
+
+    // CTA Ajukan button
+    const btnAjukanCTA = document.getElementById('btnAjukanCTA');
+    if (btnAjukanCTA) {
+        btnAjukanCTA.addEventListener('click', () => {
+            openWhatsApp();
+        });
+    }
+
+    // Auto-calculate on select change
+    const loanAmountSelect = document.getElementById('loanAmount');
+    const loanTenorSelect = document.getElementById('loanTenor');
     
-    table.innerHTML = headerHTML + bodyHTML;
-}
-
-// Generate table on page load
-generateLoanTable();
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Header scroll effect
-const header = document.querySelector('.header');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        header.style.background = 'rgba(10, 10, 11, 0.95)';
-        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
-    } else {
-        header.style.background = 'rgba(10, 10, 11, 0.8)';
-        header.style.boxShadow = 'none';
+    if (loanAmountSelect) {
+        loanAmountSelect.addEventListener('change', calculateLoan);
     }
     
-    lastScroll = currentScroll;
-});
+    if (loanTenorSelect) {
+        loanTenorSelect.addEventListener('change', calculateLoan);
+    }
+}
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// ========================================
+// HEADER SCROLL EFFECT
+// ========================================
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+/**
+ * Add shadow to header on scroll
+ */
+function initializeHeaderScroll() {
+    const header = document.querySelector('.header-mobile');
+    if (!header) return;
+
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 50) {
+            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+        } else {
+            header.style.boxShadow = 'none';
         }
+
+        lastScroll = currentScroll;
     });
-}, observerOptions);
-
-// Observe elements for animation
-document.querySelectorAll('.trust-card, .stat-card, .requirement-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// === WHATSAPP AJUKAN PINJAMAN ===
-const waBtn = document.getElementById("waAjukan");
-
-if (waBtn) {
-  waBtn.addEventListener("click", () => {
-    const jumlah = document.getElementById("loanAmount")?.value || "-";
-    const tenor = document.getElementById("loanTenor")?.value || "-";
-
-    const pesan = `
-Halo KSP Makmur Mandiri,
-Saya ingin mengajukan pinjaman.
-
-Jumlah Pinjaman: Rp ${Number(jumlah).toLocaleString("id-ID")}
-Tenor: ${tenor} bulan
-
-Mohon informasinya, terima kasih.
-    `;
-
-    const nomorWA = "6285724729600"; // ganti sesuai admin
-    const url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
-    window.open(url, "_blank");
-  });
 }
 
-// === WHATSAPP AJUKAN PINJAMAN (SATU FUNGSI) ===
-function ajukanKeWhatsApp() {
-  const jumlah = document.getElementById("loanAmount")?.value || "-";
-  const tenor = document.getElementById("loanTenor")?.value || "-";
+// ========================================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ========================================
 
-  const pesan = `
-Halo KSP Makmur Mandiri,
-Saya ingin mengajukan pinjaman.
-
-Jumlah Pinjaman: Rp ${Number(jumlah).toLocaleString("id-ID")}
-Tenor: ${tenor} bulan
-
-Mohon informasinya, terima kasih.
-  `;
-
-  const nomorWA = "6285724729600"; // ganti sesuai admin
-  const url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
-  window.open(url, "_blank");
+/**
+ * Enable smooth scroll for all anchor links
+ */
+function initializeSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            smoothScrollTo(targetElement);
+        });
+    });
 }
 
-// PASANG KE DUA TOMBOL
-document.getElementById("waAjukan")?.addEventListener("click", ajukanKeWhatsApp);
-document.getElementById("btnAjukanHeader")?.addEventListener("click", ajukanKeWhatsApp);
+// ========================================
+// FADE-IN ANIMATION ON SCROLL
+// ========================================
 
-document.getElementById("btnAjukanMobile")?.addEventListener("click", ajukanKeWhatsApp);
+/**
+ * Initialize intersection observer for fade-in animations
+ */
+function initializeFadeInAnimation() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-mobileMenuBtn.addEventListener("click", () => {
-  document.body.classList.toggle("menu-open");
-});
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
 
+    // Observe elements
+    const elementsToObserve = document.querySelectorAll(
+        '.feature-card, .stat-card, .requirement-card, .contact-card'
+    );
 
+    elementsToObserve.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
 
+// ========================================
+// PREVENT ZOOM ON INPUT FOCUS (iOS)
+// ========================================
 
+/**
+ * Prevent zoom on input focus for iOS devices
+ */
+function preventZoomOnFocus() {
+    const inputs = document.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            document.body.style.fontSize = '16px';
+        });
+        input.addEventListener('blur', () => {
+            document.body.style.fontSize = '';
+        });
+    });
+}
+
+// ========================================
+// INITIALIZATION
+// ========================================
+
+/**
+ * Initialize all functionality when DOM is ready
+ */
+function init() {
+    console.log('Initializing KSP Makmur Mandiri App...');
+    
+    // Initialize all features
+    initializeEventListeners();
+    initializeHeaderScroll();
+    initializeSmoothScroll();
+    initializeFadeInAnimation();
+    preventZoomOnFocus();
+    
+    // Run initial calculation
+    calculateLoan();
+    
+    console.log('App initialized successfully!');
+}
+
+// Run initialization when DOM is fully loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
+
+// ========================================
+// SERVICE WORKER REGISTRATION (Optional)
+// ========================================
+
+/**
+ * Register service worker for PWA support (if available)
+ */
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        // Uncomment below to enable service worker
+        // navigator.serviceWorker.register('/sw.js')
+        //     .then(registration => {
+        //         console.log('SW registered:', registration);
+        //     })
+        //     .catch(error => {
+        //         console.log('SW registration failed:', error);
+        //     });
+    });
+}
+
+// ========================================
+// EXPORT FOR TESTING (Optional)
+// ========================================
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        formatCurrency,
+        calculateLoan,
+        openWhatsApp,
+        generateLoanMessage
+    };
+}
