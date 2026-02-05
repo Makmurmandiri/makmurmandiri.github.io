@@ -4,7 +4,8 @@
 const WHATSAPP_NUMBER = '6285724729600';
 const ADMIN_FEE_RATE = 0.085; // 8.5%
 const INTEREST_RATE = 0.02; // 2% per month
-const STAMP_DUTY = 33000; // 3 materai @ 11,000 each
+const STAMP_DUTY_LOW = 22000;  // ≤ 5 jt
+const STAMP_DUTY_HIGH = 33000; // > 6 jt
 const INITIAL_SAVINGS = 1025000; // Fixed initial mandatory savings
 const MONTHLY_SAVINGS = 205000; // Fixed monthly mandatory savings
 
@@ -68,21 +69,27 @@ function calculateLoan() {
 
     // Calculate all values
     const adminFee = loanAmount * ADMIN_FEE_RATE;
-    const receivedAmount = loanAmount - adminFee - INITIAL_SAVINGS - STAMP_DUTY;
+    const stampDuty = loanAmount > 5000000 ? STAMP_DUTY_HIGH : STAMP_DUTY_LOW;
+    const receivedAmount = loanAmount - adminFee - INITIAL_SAVINGS - stampDuty;
     const principalPayment = loanAmount / tenor;
     const interestPayment = loanAmount * INTEREST_RATE;
     const totalMonthlyPayment = principalPayment + interestPayment + MONTHLY_SAVINGS;
 
     // Update DOM elements
-    updateElementText('resultLoanAmount', formatCurrency(loanAmount));
-    updateElementText('resultAdminFee', formatCurrency(adminFee));
-    updateElementText('resultInitialSavings', formatCurrency(INITIAL_SAVINGS));
-    updateElementText('resultStampDuty', formatCurrency(STAMP_DUTY));
-    updateElementText('resultReceivedAmount', formatCurrency(receivedAmount));
-    updateElementText('resultPrincipal', formatCurrency(principalPayment));
-    updateElementText('resultInterest', formatCurrency(interestPayment));
-    updateElementText('resultMonthlySavings', formatCurrency(MONTHLY_SAVINGS));
-    updateElementText('resultTotalMonthly', formatCurrency(totalMonthlyPayment));
+  // Update DOM elements
+updateElementText('resultLoanAmount', formatCurrency(loanAmount));
+updateElementText('resultAdminFee', formatCurrency(adminFee));
+updateElementText('resultInitialSavings', formatCurrency(INITIAL_SAVINGS));
+
+// ✅ INI YANG DIGANTI
+updateElementText('resultStampDuty', formatCurrency(stampDuty));
+
+updateElementText('resultReceivedAmount', formatCurrency(receivedAmount));
+updateElementText('resultPrincipal', formatCurrency(principalPayment));
+updateElementText('resultInterest', formatCurrency(interestPayment));
+updateElementText('resultMonthlySavings', formatCurrency(MONTHLY_SAVINGS));
+updateElementText('resultTotalMonthly', formatCurrency(totalMonthlyPayment));
+
 
     // Show result container
     resultContainer.style.display = 'block';
