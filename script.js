@@ -6,7 +6,7 @@ const ADMIN_FEE_RATE = 0.085; // 8.5%
 const INTEREST_RATE = 0.02; // 2% per month
 const STAMP_DUTY = 33000; // 3 materai @ 11,000 each
 const INITIAL_SAVINGS = 1025000; // Fixed initial mandatory savings
-const MONTHLY_SAVINGS = 155000; // Fixed monthly mandatory savings
+const MONTHLY_SAVINGS = 205000; // Fixed monthly mandatory savings
 
 // ========================================
 // UTILITY FUNCTIONS
