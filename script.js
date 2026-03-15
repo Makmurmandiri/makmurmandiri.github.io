@@ -354,3 +354,139 @@ if (typeof module !== 'undefined' && module.exports) {
         generateLoanMessage
     };
 }
+
+// ==========================
+// HITUNG PELUNASAN PINJAMAN
+// ==========================
+function hitungPelunasan(pinjaman, tenor, angsuranKe){
+
+let bunga = 0.02;
+let tabungan = 150000;
+
+// pokok per bulan
+let pokok = pinjaman / tenor;
+
+// pembulatan ke 500 / 1000
+let sisa = pokok % 1000;
+
+if(sisa >= 200 && sisa <= 500){
+    pokok = pokok - sisa + 500;
+}else if(sisa >= 600){
+    pokok = pokok - sisa + 1000;
+}
+
+// jasa per bulan
+let jasa = pinjaman * bunga;
+
+// sisa angsuran
+let sisaAngsuran = tenor - angsuranKe;
+
+// total sisa
+let sisaPokok = pokok * sisaAngsuran;
+let sisaJasa = jasa * sisaAngsuran;
+
+let total = sisaPokok + sisaJasa + tabungan;
+
+return {
+    sisaPokok,
+    sisaJasa,
+    tabungan,
+    total
+};
+
+}
+
+console.log("App initialized successfully!");
+
+// tes fungsi pelunasan
+let tesPelunasan = hitungPelunasan(10000000,12,5);
+console.log("TES PELUNASAN :", tesPelunasan);
+
+function hitungPelunasanUI(){
+
+let pinjaman = parseInt(document.getElementById("pelunasanPinjaman").value);
+let tenor = parseInt(document.getElementById("pelunasanTenor").value);
+let angsuranKe = parseInt(document.getElementById("pelunasanKe").value);
+
+if(!pinjaman || !tenor || !angsuranKe){
+alert("Lengkapi data terlebih dahulu");
+return;
+}
+
+if(angsuranKe > tenor){
+alert("Angsuran tidak boleh lebih dari tenor");
+return;
+}
+
+let bunga = 0.02;
+let tabungan = 150000;
+
+// pokok per bulan
+let pokok = pinjaman / tenor;
+
+// pembulatan
+let sisa = pokok % 1000;
+
+if(sisa >= 200 && sisa <= 500){
+pokok = pokok - sisa + 500;
+}else if(sisa >= 600){
+pokok = pokok - sisa + 1000;
+}
+
+// jasa per bulan
+let jasa = pinjaman * bunga;
+
+// sisa angsuran
+let sisaAngsuran = tenor - angsuranKe;
+
+// hitung total
+let sisaPokok = pokok * sisaAngsuran;
+let sisaJasa = jasa * sisaAngsuran;
+
+let total = sisaPokok + sisaJasa + tabungan;
+
+// tampilkan hasil
+document.getElementById("hasilPelunasan").innerHTML = `
+
+<div class="result-item">
+<span class="result-label">Pokok per bulan</span>
+<span class="result-value">Rp ${pokok.toLocaleString()}</span>
+</div>
+
+<div class="result-item">
+<span class="result-label">Jasa per bulan</span>
+<span class="result-value">Rp ${jasa.toLocaleString()}</span>
+</div>
+
+<div class="result-item">
+<span class="result-label">Sisa angsuran</span>
+<span class="result-value">${sisaAngsuran} bulan</span>
+</div>
+
+<hr style="margin:20px 0;opacity:0.2">
+
+<div class="result-item">
+<span class="result-label">Pokok</span>
+<span class="result-value">${pokok.toLocaleString()} x ${sisaAngsuran} = Rp ${sisaPokok.toLocaleString()}</span>
+</div>
+
+<div class="result-item">
+<span class="result-label">Jasa</span>
+<span class="result-value">${jasa.toLocaleString()} x ${sisaAngsuran} = Rp ${sisaJasa.toLocaleString()}</span>
+</div>
+
+<div class="result-item">
+<span class="result-label">Tabungan</span>
+<span class="result-value">150.000 x 1 = Rp ${tabungan.toLocaleString()}</span>
+</div>
+
+<hr style="margin:20px 0;opacity:0.2">
+
+<div class="result-item highlight">
+<span class="result-label">TOTAL PELUNASAN</span>
+<span class="result-value">Rp ${total.toLocaleString()}</span>
+</div>
+
+`;
+
+}
