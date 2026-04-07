@@ -420,6 +420,7 @@ return;
 
 let bunga = 0.02;
 let tabungan = 150000;
+let adminPerBulan = 5000; // ✅ TAMBAHAN
 
 // pokok per bulan
 let pokok = pinjaman / tenor;
@@ -442,8 +443,9 @@ let sisaAngsuran = tenor - angsuranKe;
 // hitung total
 let sisaPokok = pokok * sisaAngsuran;
 let sisaJasa = jasa * sisaAngsuran;
+let totalAdmin = adminPerBulan * angsuranKe; // ✅ TAMBAHAN
 
-let total = sisaPokok + sisaJasa + tabungan;
+let total = sisaPokok + sisaJasa + tabungan + totalAdmin; // ✅ UPDATE
 
 // tampilkan hasil
 document.getElementById("hasilPelunasan").innerHTML = `
@@ -478,6 +480,11 @@ document.getElementById("hasilPelunasan").innerHTML = `
 <div class="result-item">
 <span class="result-label">Tabungan</span>
 <span class="result-value">150.000 x 1 = Rp ${tabungan.toLocaleString()}</span>
+</div>
+
+<div class="result-item">
+<span class="result-label">Admin</span>
+<span class="result-value">5.000 x ${angsuranKe} = Rp ${totalAdmin.toLocaleString()}</span>
 </div>
 
 <hr style="margin:20px 0;opacity:0.2">
