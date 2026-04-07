@@ -418,46 +418,62 @@ alert("Angsuran tidak boleh lebih dari tenor");
 return;
 }
 
+// ========================
+// CONFIG
+// ========================
 let bunga = 0.02;
 let tabungan = 150000;
-let adminPerBulan = 5000; // ✅ TAMBAHAN
+let adminPerBulan = 5000;
 
-// pokok per bulan
+// ========================
+// HITUNG DASAR
+// ========================
 let pokok = pinjaman / tenor;
 
 // pembulatan
-let sisa = pokok % 1000;
+let sisaPembulatan = pokok % 1000;
 
-if(sisa >= 200 && sisa <= 500){
-pokok = pokok - sisa + 500;
-}else if(sisa >= 600){
-pokok = pokok - sisa + 1000;
+if(sisaPembulatan >= 200 && sisaPembulatan <= 500){
+pokok = pokok - sisaPembulatan + 500;
+}else if(sisaPembulatan >= 600){
+pokok = pokok - sisaPembulatan + 1000;
 }
 
 // jasa per bulan
 let jasa = pinjaman * bunga;
 
-// sisa angsuran
+// ========================
+// SISA ANGSURAN (INI KUNCI)
+// ========================
 let sisaAngsuran = tenor - angsuranKe;
 
-// hitung total
-let sisaPokok = pokok * sisaAngsuran;
-let sisaJasa = jasa * sisaAngsuran;
-let totalAdmin = adminPerBulan * angsuranKe; // ✅ TAMBAHAN
+// ========================
+// TOTAL PERHITUNGAN
+// ========================
+let totalPokok = pokok * sisaAngsuran;
+let totalJasa = jasa * sisaAngsuran;
+let totalAdmin = adminPerBulan * sisaAngsuran;
 
-let total = sisaPokok + sisaJasa + tabungan + totalAdmin; // ✅ UPDATE
+let total = totalPokok + totalJasa + tabungan + totalAdmin;
 
-// tampilkan hasil
+// ========================
+// FORMAT RUPIAH
+// ========================
+const rp = (angka) => "Rp " + angka.toLocaleString("id-ID");
+
+// ========================
+// OUTPUT UI
+// ========================
 document.getElementById("hasilPelunasan").innerHTML = `
 
 <div class="result-item">
 <span class="result-label">Pokok per bulan</span>
-<span class="result-value">Rp ${pokok.toLocaleString()}</span>
+<span class="result-value">${rp(pokok)}</span>
 </div>
 
 <div class="result-item">
 <span class="result-label">Jasa per bulan</span>
-<span class="result-value">Rp ${jasa.toLocaleString()}</span>
+<span class="result-value">${rp(jasa)}</span>
 </div>
 
 <div class="result-item">
@@ -469,29 +485,29 @@ document.getElementById("hasilPelunasan").innerHTML = `
 
 <div class="result-item">
 <span class="result-label">Pokok</span>
-<span class="result-value">${pokok.toLocaleString()} x ${sisaAngsuran} = Rp ${sisaPokok.toLocaleString()}</span>
+<span class="result-value">${rp(pokok)} × ${sisaAngsuran} = ${rp(totalPokok)}</span>
 </div>
 
 <div class="result-item">
 <span class="result-label">Jasa</span>
-<span class="result-value">${jasa.toLocaleString()} x ${sisaAngsuran} = Rp ${sisaJasa.toLocaleString()}</span>
-</div>
-
-<div class="result-item">
-<span class="result-label">Tabungan</span>
-<span class="result-value">150.000 x 1 = Rp ${tabungan.toLocaleString()}</span>
+<span class="result-value">${rp(jasa)} × ${sisaAngsuran} = ${rp(totalJasa)}</span>
 </div>
 
 <div class="result-item">
 <span class="result-label">Admin</span>
-<span class="result-value">5.000 x ${angsuranKe} = Rp ${totalAdmin.toLocaleString()}</span>
+<span class="result-value">${rp(adminPerBulan)} × ${sisaAngsuran} = ${rp(totalAdmin)}</span>
+</div>
+
+<div class="result-item">
+<span class="result-label">Tabungan</span>
+<span class="result-value">${rp(tabungan)}</span>
 </div>
 
 <hr style="margin:20px 0;opacity:0.2">
 
 <div class="result-item highlight">
 <span class="result-label">TOTAL PELUNASAN</span>
-<span class="result-value">Rp ${total.toLocaleString()}</span>
+<span class="result-value">${rp(total)}</span>
 </div>
 
 `;
