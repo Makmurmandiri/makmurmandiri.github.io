@@ -2,12 +2,13 @@
 // GLOBAL VARIABLES
 // ========================================
 const WHATSAPP_NUMBER = '6285724729600';
-const ADMIN_FEE_RATE = 0.085; // 8.5%
-const INTEREST_RATE = 0.02; // 2% per month
-const STAMP_DUTY_LOW = 22000;  // ≤ 5 jt
-const STAMP_DUTY_HIGH = 33000; // > 6 jt
-const INITIAL_SAVINGS = 1025000; // Fixed initial mandatory savings
-const MONTHLY_SAVINGS = 205000; // Fixed monthly mandatory savings
+const INTEREST_RATE = 0.02;
+const ADMIN_FEE_RATE = 0.09; // ✅ 9%
+const STAMP_DUTY_LOW = 22000;  // 3jt - 4jt
+const STAMP_DUTY_HIGH = 33000; // 5jt ke atas
+const SIMPANAN_WAJIB = 50000;     // ✅ baru
+const SIMPANAN_POKOK = 1000000;   // ✅ baru
+const MONTHLY_SAVINGS = 50000;    // ✅ tabungan per bulan
 
 // ========================================
 // UTILITY FUNCTIONS
@@ -69,8 +70,9 @@ function calculateLoan() {
 
     // Calculate all values
     const adminFee = loanAmount * ADMIN_FEE_RATE;
-    const stampDuty = loanAmount > 5000000 ? STAMP_DUTY_HIGH : STAMP_DUTY_LOW;
-    const receivedAmount = loanAmount - adminFee - INITIAL_SAVINGS - stampDuty;
+    const stampDuty = loanAmount <= 4000000 ? STAMP_DUTY_LOW : STAMP_DUTY_HIGH;
+    const totalSimpanan = SIMPANAN_WAJIB + SIMPANAN_POKOK;
+    const receivedAmount = loanAmount - adminFee - totalSimpanan - stampDuty;
     const principalPayment = loanAmount / tenor;
     const interestPayment = loanAmount * INTEREST_RATE;
     const totalMonthlyPayment = principalPayment + interestPayment + MONTHLY_SAVINGS;
@@ -79,7 +81,7 @@ function calculateLoan() {
   // Update DOM elements
 updateElementText('resultLoanAmount', formatCurrency(loanAmount));
 updateElementText('resultAdminFee', formatCurrency(adminFee));
-updateElementText('resultInitialSavings', formatCurrency(INITIAL_SAVINGS));
+updateElementText('resultInitialSavings', formatCurrency(totalSimpanan));
 
 // ✅ INI YANG DIGANTI
 updateElementText('resultStampDuty', formatCurrency(stampDuty));
@@ -124,7 +126,7 @@ function generateLoanMessage() {
     const loanAmount = parseInt(loanAmountSelect.value);
     const tenor = parseInt(loanTenorSelect.value);
     const principalPayment = loanAmount / tenor;
-    const interestPayment = loanAmount * INTEREST_RATE;
+    const interestpayment = loanAmount * INTEREST_RATE;
     const totalMonthlyPayment = principalPayment + interestPayment + MONTHLY_SAVINGS;
 
     const message = `Halo KSP Makmur Mandiri,
@@ -418,62 +420,49 @@ alert("Angsuran tidak boleh lebih dari tenor");
 return;
 }
 
-// ========================
-// CONFIG
-// ========================
 let bunga = 0.02;
-let tabungan = 150000;
-let adminPerBulan = 5000;
+let tabunganPerBulan = 50000; // ✅ UBAH JADI 50RB
 
-// ========================
-// HITUNG DASAR
-// ========================
+// pokok per bulan
 let pokok = pinjaman / tenor;
 
 // pembulatan
-let sisaPembulatan = pokok % 1000;
+let sisa = pokok % 1000;
 
-if(sisaPembulatan >= 200 && sisaPembulatan <= 500){
-pokok = pokok - sisaPembulatan + 500;
-}else if(sisaPembulatan >= 600){
-pokok = pokok - sisaPembulatan + 1000;
+if(sisa >= 200 && sisa <= 500){
+pokok = pokok - sisa + 500;
+}else if(sisa >= 600){
+pokok = pokok - sisa + 1000;
 }
 
 // jasa per bulan
 let jasa = pinjaman * bunga;
 
-// ========================
-// SISA ANGSURAN (INI KUNCI)
-// ========================
+// sisa angsuran
 let sisaAngsuran = tenor - angsuranKe;
 
 // ========================
-// TOTAL PERHITUNGAN
+// HITUNG TOTAL
 // ========================
-let totalPokok = pokok * sisaAngsuran;
-let totalJasa = jasa * sisaAngsuran;
-let totalAdmin = adminPerBulan * sisaAngsuran;
+let sisaPokok = pokok * sisaAngsuran;
+let sisaJasa = jasa * sisaAngsuran;
+let totalTabungan = tabunganPerBulan * sisaAngsuran; // ✅ DIKALI SISA
 
-let total = totalPokok + totalJasa + tabungan + totalAdmin;
-
-// ========================
-// FORMAT RUPIAH
-// ========================
-const rp = (angka) => "Rp " + angka.toLocaleString("id-ID");
+let total = sisaPokok + sisaJasa + totalTabungan;
 
 // ========================
-// OUTPUT UI
+// OUTPUT
 // ========================
 document.getElementById("hasilPelunasan").innerHTML = `
 
 <div class="result-item">
 <span class="result-label">Pokok per bulan</span>
-<span class="result-value">${rp(pokok)}</span>
+<span class="result-value">Rp ${pokok.toLocaleString()}</span>
 </div>
 
 <div class="result-item">
 <span class="result-label">Jasa per bulan</span>
-<span class="result-value">${rp(jasa)}</span>
+<span class="result-value">Rp ${jasa.toLocaleString()}</span>
 </div>
 
 <div class="result-item">
@@ -485,29 +474,24 @@ document.getElementById("hasilPelunasan").innerHTML = `
 
 <div class="result-item">
 <span class="result-label">Pokok</span>
-<span class="result-value">${rp(pokok)} × ${sisaAngsuran} = ${rp(totalPokok)}</span>
+<span class="result-value">${pokok.toLocaleString()} x ${sisaAngsuran} = Rp ${sisaPokok.toLocaleString()}</span>
 </div>
 
 <div class="result-item">
 <span class="result-label">Jasa</span>
-<span class="result-value">${rp(jasa)} × ${sisaAngsuran} = ${rp(totalJasa)}</span>
-</div>
-
-<div class="result-item">
-<span class="result-label">Admin</span>
-<span class="result-value">${rp(adminPerBulan)} × ${sisaAngsuran} = ${rp(totalAdmin)}</span>
+<span class="result-value">${jasa.toLocaleString()} x ${sisaAngsuran} = Rp ${sisaJasa.toLocaleString()}</span>
 </div>
 
 <div class="result-item">
 <span class="result-label">Tabungan</span>
-<span class="result-value">${rp(tabungan)}</span>
+<span class="result-value">${tabunganPerBulan.toLocaleString()} x ${sisaAngsuran} = Rp ${totalTabungan.toLocaleString()}</span>
 </div>
 
 <hr style="margin:20px 0;opacity:0.2">
 
 <div class="result-item highlight">
 <span class="result-label">TOTAL PELUNASAN</span>
-<span class="result-value">${rp(total)}</span>
+<span class="result-value">Rp ${total.toLocaleString()}</span>
 </div>
 
 `;
