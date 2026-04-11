@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KSP NusantaraKu | Pinjaman Mudah & Cepat</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="logo-icon">₭</span>
+        <span class="logo-text">NusantaraKu</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#fitur">Keunggulan</a></li>
+        <li><a href="#kalkulator">Kalkulator</a></li>
+        <li><a href="#syarat">Syarat</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+      <a href="#kontak" class="btn-nav">Ajukan Sekarang</a>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-lines"></div>
+    <div class="hero-content">
+      <div class="badge-tag">✦ Koperasi Resmi & Terpercaya</div>
+      <h1 class="hero-title">Wujudkan <br><span class="gradient-text">Impian Anda</span><br>Bersama Kami</h1>
+      <p class="hero-sub">KSP NusantaraKu hadir dengan solusi pinjaman transparan, proses cepat, dan bunga ringan untuk mendukung pertumbuhan finansial Anda.</p>
+      <div class="hero-btns">
+        <a href="#kalkulator" class="btn-primary">Hitung Pinjaman</a>
+        <a href="#fitur" class="btn-ghost">Pelajari Lebih Lanjut</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-num">Rp 20 Jt</span>
+        <span class="stat-label">Pinjaman Maksimal</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <span class="stat-num">24 Bln</span>
+        <span class="stat-label">Tenor Maksimal</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <span class="stat-num">2%</span>
+        <span class="stat-label">Jasa Per Bulan</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <span class="stat-num">16 Thn</span>
+        <span class="stat-label">Pengalaman</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FITUR -->
+  <section class="fitur" id="fitur">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Kenapa Memilih Kami</p>
+        <h2 class="section-title">Keunggulan <span class="gradient-text">NusantaraKu</span></h2>
+      </div>
+      <div class="fitur-grid">
+        <div class="fitur-card">
+          <div class="fitur-icon">📜</div>
+          <h3>Legalitas Resmi</h3>
+          <p>Terdaftar resmi dengan Badan Hukum No. 18/SKT/KOPERASI &amp; UMKM/518/VI/2009</p>
+        </div>
+        <div class="fitur-card">
+          <div class="fitur-icon">⚡</div>
+          <h3>Proses Cepat</h3>
+          <p>Pengajuan mudah dengan proses verifikasi yang cepat dan transparan tanpa antri lama</p>
+        </div>
+        <div class="fitur-card">
+          <div class="fitur-icon">💰</div>
+          <h3>Bunga Ringan</h3>
+          <p>Jasa hanya 2% per bulan dengan cicilan tetap yang mudah direncanakan setiap bulan</p>
+        </div>
+        <div class="fitur-card">
+          <div class="fitur-icon">🤝</div>
+          <h3>Pelayanan Ramah</h3>
+          <p>Tim profesional kami siap membantu Anda dengan penuh keramahan dan kejujuran</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KALKULATOR -->
+  <section class="kalkulator-section" id="kalkulator">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Simulasi Pinjaman</p>
+        <h2 class="section-title">Kalkulator <span class="gradient-text">Pinjaman</span></h2>
+      </div>
+      <div class="kalkulatur-wrapper">
+        <div class="kalk-left">
+          <div class="form-group">
+            <label>Jumlah Pinjaman</label>
+            <select id="jumlahPinjaman">
+              <option value="">-- Pilih Jumlah --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tenor (Bulan)</label>
+            <select id="tenorPinjaman">
+              <option value="">-- Pilih Tenor --</option>
+            </select>
+          </div>
+          <button class="btn-primary full-width" id="btnHitung" onclick="hitungPinjaman()">Hitung Angsuran</button>
+        </div>
+        <div class="kalk-right" id="hasilKalkulator">
+          <div class="hasil-placeholder">
+            <span class="placeholder-icon">📊</span>
+            <p>Isi form di samping untuk melihat simulasi angsuran Anda</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMULASI PELUNASAN -->
+  <section class="pelunasan-section" id="pelunasan">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Simulasi Pelunasan</p>
+        <h2 class="section-title">Hitung Sisa <span class="gradient-text">Pelunasan</span></h2>
+      </div>
+      <div class="kalkulatur-wrapper">
+        <div class="kalk-left">
+          <div class="form-group">
+            <label>Jumlah Pinjaman</label>
+            <select id="plJumlah">
+              <option value="">-- Pilih Jumlah Pinjaman --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tenor (Bulan)</label>
+            <select id="plTenor">
+              <option value="">-- Pilih Tenor --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Sudah Angsuran Ke</label>
+            <input type="number" id="plAngsuranKe" placeholder="Contoh: 3" min="1" />
+          </div>
+          <button class="btn-primary full-width" onclick="hitungPelunasan()">Hitung Pelunasan</button>
+        </div>
+        <div class="kalk-right" id="hasilPelunasan">
+          <div class="hasil-placeholder">
+            <span class="placeholder-icon">🧮</span>
+            <p>Isi form di samping untuk simulasi pelunasan pinjaman Anda</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYARAT -->
+  <section class="syarat-section" id="syarat">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Persyaratan Dokumen</p>
+        <h2 class="section-title">Dokumen yang <span class="gradient-text">Diperlukan</span></h2>
+      </div>
+      <div class="syarat-grid">
+        <div class="syarat-card">
+          <span class="syarat-num">01</span>
+          <div>
+            <h4>KTP + Kartu Keluarga</h4>
+            <p>Fotokopi KTP dan KK yang masih berlaku</p>
+          </div>
+        </div>
+        <div class="syarat-card">
+          <span class="syarat-num">02</span>
+          <div>
+            <h4>Ijazah Terakhir</h4>
+            <p>Fotokopi ijazah pendidikan terakhir</p>
+          </div>
+        </div>
+        <div class="syarat-card">
+          <span class="syarat-num">03</span>
+          <div>
+            <h4>Surat Pengangkatan / Kontrak Kerja</h4>
+            <p>Bukti status kepegawaian dari perusahaan</p>
+          </div>
+        </div>
+        <div class="syarat-card">
+          <span class="syarat-num">04</span>
+          <div>
+            <h4>Kartu BPJS Ketenagakerjaan</h4>
+            <p>Kartu Jamsostek/BPJS asli yang masih aktif</p>
+          </div>
+        </div>
+        <div class="syarat-card">
+          <span class="syarat-num">05</span>
+          <div>
+            <h4>Buku Tabungan + ATM</h4>
+            <p>Buku tabungan gaji dan rekening koran 3 bulan terakhir</p>
+          </div>
+        </div>
+        <div class="syarat-card">
+          <span class="syarat-num">06</span>
+          <div>
+            <h4>Slip Gaji Terakhir</h4>
+            <p>Slip gaji bulan terakhir dari perusahaan</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAK -->
+  <section class="kontak-section" id="kontak">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Hubungi Kami</p>
+        <h2 class="section-title">Tim <span class="gradient-text">Kami Siap</span> Membantu</h2>
+      </div>
+      <div class="kontak-grid">
+        <a href="https://wa.me/6281383960670" class="kontak-card" target="_blank">
+          <div class="kontak-avatar">B</div>
+          <div class="kontak-info">
+            <h4>Bram</h4>
+            <p>0813 8396 0670</p>
+          </div>
+          <span class="wa-btn">WhatsApp</span>
+        </a>
+        <a href="https://wa.me/6285724729600" class="kontak-card" target="_blank">
+          <div class="kontak-avatar">R</div>
+          <div class="kontak-info">
+            <h4>Risky</h4>
+            <p>0857 2472 9600</p>
+          </div>
+          <span class="wa-btn">WhatsApp</span>
+        </a>
+        <a href="https://wa.me/62881025646238" class="kontak-card" target="_blank">
+          <div class="kontak-avatar">J</div>
+          <div class="kontak-info">
+            <h4>Jubri</h4>
+            <p>0881 0256 46238</p>
+          </div>
+          <span class="wa-btn">WhatsApp</span>
+        </a>
+        <a href="https://wa.me/6285591587413" class="kontak-card" target="_blank">
+          <div class="kontak-avatar">R</div>
+          <div class="kontak-info">
+            <h4>Riko</h4>
+            <p>0855 9158 7413</p>
+          </div>
+          <span class="wa-btn">WhatsApp</span>
+        </a>
+      </div>
+
+      <div class="lokasi-box">
+        <div class="lokasi-item">
+          <span class="lokasi-icon">📍</span>
+          <div>
+            <strong>Alamat Kantor</strong>
+            <p>Jl. Proklamasi, Dsn. Babakan Tengah RT. 42 RW. 02, Desa Karyasari, Kec. Rengasdengklok, Kab. Karawang</p>
+          </div>
+        </div>
+        <div class="lokasi-item">
+          <span class="lokasi-icon">📞</span>
+          <div>
+            <strong>Telepon Kantor</strong>
+            <p>(021) 1234-5678</p>
+          </div>
+        </div>
+        <div class="lokasi-item">
+          <span class="lokasi-icon">🕐</span>
+          <div>
+            <strong>Jam Operasional</strong>
+            <p>Senin – Jumat: 08.00 – 16.00 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Siap Mengajukan Pinjaman?</h2>
+        <p>Hubungi kami sekarang untuk konsultasi gratis. Kami <strong>TIDAK</strong> melayani pinjaman online — semua proses dilakukan secara offline di kantor kami.</p>
+        <a href="#kontak" class="btn-primary">Hubungi Kami Sekarang</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-icon">₭</span>
+          <span class="logo-text">NusantaraKu</span>
+        </div>
+        <p class="footer-copy">© 2026 KSP NusantaraKu — Koperasi Simpan Pinjam Resmi & Terpercaya</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
