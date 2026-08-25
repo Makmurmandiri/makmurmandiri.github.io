@@ -375,7 +375,7 @@ const CHATBOT_PROXY_URL = "https://makmurmandiri-chatbot.rrsecbounty.workers.dev
   chatWindow.id = 'kmm-chat-window';
   chatWindow.innerHTML = `
     <div id="kmm-chat-header">
-      <span>Asisten KSP Makmur Mandiri</span>
+      <span>ai KSP Makmur Mandiri</span>
       <button id="kmm-chat-close" aria-label="Tutup chat">×</button>
     </div>
     <div id="kmm-chat-messages"></div>
