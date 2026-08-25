@@ -217,3 +217,244 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+/* =============================================
+   WIDGET CHAT AI - KSP Makmur Mandiri
+   Semua dibuat lewat JS, tidak perlu ubah HTML.
+   Chat memanggil Cloudflare Worker (proxy),
+   BUKAN OpenRouter langsung, biar API key aman.
+   ============================================= */
+
+// GANTI dengan URL Worker kamu setelah dideploy ke Cloudflare
+// contoh: "https://makmurmandiri-chatbot.namamu.workers.dev"
+const CHATBOT_PROXY_URL = "GANTI_DENGAN_URL_CLOUDFLARE_WORKER_KAMU";
+
+(function initChatWidget() {
+  let chatHistory = [];
+  let isLoading = false;
+
+  // ---- Inject CSS ----
+  const style = document.createElement('style');
+  style.textContent = `
+    #kmm-chat-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #0f7a3e;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      font-size: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+      transition: transform 0.2s ease;
+    }
+    #kmm-chat-toggle:hover { transform: scale(1.06); }
+
+    #kmm-chat-window {
+      position: fixed;
+      bottom: 96px;
+      right: 24px;
+      width: 340px;
+      max-width: 90vw;
+      height: 460px;
+      max-height: 75vh;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+      font-family: inherit;
+    }
+    #kmm-chat-window.open { display: flex; }
+
+    #kmm-chat-header {
+      background: #0f7a3e;
+      color: #fff;
+      padding: 14px 16px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+    }
+    #kmm-chat-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    #kmm-chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      background: #f7f8fa;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .kmm-msg {
+      max-width: 85%;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .kmm-msg.user {
+      align-self: flex-end;
+      background: #0f7a3e;
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .kmm-msg.bot {
+      align-self: flex-start;
+      background: #fff;
+      color: #222;
+      border: 1px solid #e2e4e8;
+      border-bottom-left-radius: 4px;
+    }
+    .kmm-msg.typing {
+      align-self: flex-start;
+      background: #fff;
+      border: 1px solid #e2e4e8;
+      color: #888;
+      font-style: italic;
+    }
+
+    #kmm-chat-inputbar {
+      display: flex;
+      border-top: 1px solid #e2e4e8;
+      padding: 8px;
+      gap: 8px;
+      background: #fff;
+    }
+    #kmm-chat-input {
+      flex: 1;
+      border: 1px solid #d8dbe0;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-size: 13.5px;
+      outline: none;
+      font-family: inherit;
+    }
+    #kmm-chat-send {
+      background: #0f7a3e;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 0 16px;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    #kmm-chat-send:disabled { opacity: 0.5; cursor: default; }
+  `;
+  document.head.appendChild(style);
+
+  // ---- Build widget DOM ----
+  const toggleBtn = document.createElement('button');
+  toggleBtn.id = 'kmm-chat-toggle';
+  toggleBtn.setAttribute('aria-label', 'Buka chat asisten');
+  toggleBtn.textContent = '💬';
+
+  const chatWindow = document.createElement('div');
+  chatWindow.id = 'kmm-chat-window';
+  chatWindow.innerHTML = `
+    <div id="kmm-chat-header">
+      <span>Asisten KSP Makmur Mandiri</span>
+      <button id="kmm-chat-close" aria-label="Tutup chat">×</button>
+    </div>
+    <div id="kmm-chat-messages"></div>
+    <div id="kmm-chat-inputbar">
+      <input id="kmm-chat-input" type="text" placeholder="Tanya soal pinjaman..." autocomplete="off" />
+      <button id="kmm-chat-send">Kirim</button>
+    </div>
+  `;
+
+  document.body.appendChild(chatWindow);
+  document.body.appendChild(toggleBtn);
+
+  const messagesEl = chatWindow.querySelector('#kmm-chat-messages');
+  const inputEl = chatWindow.querySelector('#kmm-chat-input');
+  const sendBtn = chatWindow.querySelector('#kmm-chat-send');
+  const closeBtn = chatWindow.querySelector('#kmm-chat-close');
+
+  // Pesan sambutan awal
+  addMessage('bot', 'Halo! 👋 Saya asisten KSP Makmur Mandiri. Ada yang bisa saya bantu soal pinjaman?');
+
+  toggleBtn.addEventListener('click', () => {
+    chatWindow.classList.toggle('open');
+    if (chatWindow.classList.contains('open')) inputEl.focus();
+  });
+  closeBtn.addEventListener('click', () => chatWindow.classList.remove('open'));
+
+  sendBtn.addEventListener('click', sendMessage);
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  function addMessage(role, text) {
+    const bubble = document.createElement('div');
+    bubble.className = 'kmm-msg ' + role;
+    bubble.textContent = text;
+    messagesEl.appendChild(bubble);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return bubble;
+  }
+
+  async function sendMessage() {
+    const text = inputEl.value.trim();
+    if (!text || isLoading) return;
+
+    if (CHATBOT_PROXY_URL === "GANTI_DENGAN_URL_CLOUDFLARE_WORKER_KAMU") {
+      addMessage('bot', 'Chat belum aktif. Admin situs perlu memasang URL server chat terlebih dahulu.');
+      return;
+    }
+
+    addMessage('user', text);
+    chatHistory.push({ role: 'user', content: text });
+    inputEl.value = '';
+    isLoading = true;
+    sendBtn.disabled = true;
+
+    const typingBubble = addMessage('typing', 'Sedang mengetik...');
+
+    try {
+      const res = await fetch(CHATBOT_PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history: chatHistory })
+      });
+
+      const data = await res.json();
+      typingBubble.remove();
+
+      if (!res.ok || data.error) {
+        addMessage('bot', data.error || 'Maaf, terjadi kesalahan. Coba lagi ya.');
+      } else {
+        addMessage('bot', data.reply);
+        chatHistory.push({ role: 'assistant', content: data.reply });
+      }
+    } catch (err) {
+      typingBubble.remove();
+      addMessage('bot', 'Gagal terhubung ke server chat. Periksa koneksi internet kamu.');
+    } finally {
+      isLoading = false;
+      sendBtn.disabled = false;
+    }
+  }
+})();
