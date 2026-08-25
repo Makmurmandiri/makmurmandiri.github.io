@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // GANTI dengan URL Worker kamu setelah dideploy ke Cloudflare
 // contoh: "https://makmurmandiri-chatbot.namamu.workers.dev"
-const CHATBOT_PROXY_URL = "https://chatbot.rrsecbounty.workers.dev";
+const CHATBOT_PROXY_URL = "https://makmurmandiri-chatbot.rrsecbounty.workers.dev/";
 
 (function initChatWidget() {
   let chatHistory = [];
