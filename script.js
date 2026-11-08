@@ -35,7 +35,7 @@ const ADMIN_RATE = 0.095; // ✅ 9.5%
 const BUNGA = 0.02;
 
 const SIMPANAN_WAJIB_AWAL = 50000;
-const SIMPANAN_POKOK = 1000000;
+const SIMPANAN_POKOK = 1150000; // Simpanan Pokok + Wajib Awal = Rp 1.200.000
 const SIMPANAN_BULANAN = 205000;
 
 // ========================
@@ -103,6 +103,7 @@ document.getElementById("r-simpanan").innerText = rp(SIMPANAN_BULANAN);
 document.getElementById("r-total").innerText = rp(totalBulanan);
 
   // Scroll ke hasil
+  const hasil = document.getElementById("calcResults");
   hasil.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
